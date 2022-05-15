@@ -1,3 +1,5 @@
+/// <reference path="../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.All.d.ts" />
+/// <reference path="../../node_modules/bingmaps/types/MicrosoftMaps/Microsoft.Maps.d.ts" />
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
@@ -21,6 +23,6 @@ import { MapsComponent } from './maps/maps.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
