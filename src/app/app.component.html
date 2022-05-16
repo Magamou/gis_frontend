@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="javascript:void(0)">Logo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -16,14 +16,18 @@
                     <a class="nav-link" routerLink="header" routerLinkActive="active">Header</a>
                 </li>
             </ul>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-primary" type="button">login</button>
-                <button class="btn btn-primary" type="button">sign up</button>
-            </div>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <button class="btn btn-primary" type="button">login</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-primary" type="button">sign up</button>
+                </li>
+                
+            </ul>
+
         </div>
     </div>
-</nav> -->
+</nav>
 
-<!-- <router-outlet></router-outlet> -->
-<h1>MAP</h1>
-<div id="map" style="height: 400px; width: 600px;"></div>
+<router-outlet></router-outlet>
