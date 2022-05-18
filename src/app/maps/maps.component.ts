@@ -1,43 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser'
+import {MapModule, MapAPILoader, MarkerTypeId, IMapOptions, IBox, IMarkerIconInfo, WindowRef, 
+        DocumentRef, MapServiceFactory, 
+        BingMapAPILoaderConfig, BingMapAPILoader, 
+        GoogleMapAPILoader,  GoogleMapAPILoaderConfig, ILatLong
+} from 'angular-maps-new';
+
+import { Component, OnInit, NgModule, VERSION } from '@angular/core';
 import 'bingmaps';
-import { initialize, whenLoaded } from 'bing-maps-loader';
+
 
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.css']
 })
-export class MapsComponent implements OnInit {
+export class MapsComponent  {
+  _markerTypeId = MarkerTypeId;
+  _options: IMapOptions = {
+    disableBirdseye: false,
+    disableStreetside: false,
+    navigationBarMode: 1, 
+    zoom: 6
+  };
+  
+  _box: IBox = {
+    maxLatitude: 32,
+    maxLongitude: -92,
+    minLatitude: 29,
+    minLongitude: -98
+  };
+  
+  _iconInfo: IMarkerIconInfo = {
+     markerType: MarkerTypeId.CanvasMarker,
+     rotation: 45,
+     drawingOffset: { x: 12, y: 0 },
+     points: [
+       { x: 5, y: 20 },
+       { x: 12, y: 15 },
+       { x: 19, y: 20 },
+       { x: 12, y: 0 }
+     ],
+     color: '#f00',
+     size: { width: 24, height: 24 }
+};
+  
+  _markers: Array<ILatLong> = new Array<ILatLong>();
+  
   constructor() {
-    const API_KEY =
-      'Ams581aR0adsR3ZshnyTnH9n9-Ua68q_WetLVX483Icc3j-d6n_QSfHDVYzitfGB';
-    initialize(API_KEY);
+    this._markers.push({ latitude: 29.714994, longitude: -95.46244})
+    for(let i:number=0; i<20; i++){
+      this._markers.push({ latitude: 29.714994 + Math.random() - Math.random(), longitude: -95.46244 + Math.random() - Math.random()});
+    }      
   }
-  addPinToNewMap() {
-    // whenLoaded will resolve when the Map library is loaded
-    whenLoaded.then(() => {
-      const map=new Microsoft.Maps.Map('#map', {
-        center: new Microsoft.Maps.Location(
-          14.818551984704184, -17.252053256597538
-        ),
-      }); // <-- can also use references e.g. Vue $refs, React.createRef()
-      this.addElement(map);
-    });
+  
+  _click(index: number){
+     console.log(`Marker ${index} says: hello world...`);
   }
-  addElement(_map:Microsoft.Maps.Map):void{
-        var center=_map.getCenter();
-        console.log("center:", center);
-      //create custom Pushpin
-      var pin=new Microsoft.Maps.Pushpin(center, {
-          title:'mg',
-          subTitle:'',
-          text:''
-      });
-      _map.entities.push(pin); 
-  }
-  ngOnInit(): void {
-    this.addPinToNewMap();
-    // this.addElement();
-  }
-
 }
